@@ -1,0 +1,11 @@
+[build]
+	command = "pnpm run build"
+	publish = "dist"
+
+[build.environment]
+	NODE_VERSION = "20"
+
+[dev]
+	command = "pnpm run dev"
+	framework = "astro"
+	targetPort = 4321

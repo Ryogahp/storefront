@@ -13,7 +13,13 @@
 				"noUnusedTemplateLiteral": "off"
 			},
 			"correctness": {
-				"noUnusedImports": "warn"
+				"noUnusedImports": "warn",
+				// theme() is a Tailwind function, not a CSS unknown
+				"noUnknownFunction": "off"
+			},
+			"a11y": {
+				// role="status" region is intentional and correct
+				"useSemanticElements": "off"
 			},
 			"suspicious": {
 				"noImplicitAnyLet": "off",
