@@ -32,7 +32,8 @@ const productImages = await Promise.all(
 		getImage({
 			src: new URL(src, Astro.url.origin).href,
 			alt: '',
-			inferSize: true,
+			width: 960,
+			height: 960,
 			widths: [400, 700, 960],
 			sizes: '(min-width: 1280px) 960px, 100vw',
 		}),
