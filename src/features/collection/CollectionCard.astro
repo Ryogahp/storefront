@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { cldImageUrl } from '~/lib/cloudinary.server';
 import { button } from '~/styles.ts';
 import Card from '~/components/ui/Card.tsx';
 
@@ -9,23 +9,22 @@ export interface Props {
 	imageUrl?: string;
 	cta?: string;
 }
+
+const imageUrl = Astro.props.imageUrl && cldImageUrl(Astro.props.imageUrl, 390, 390);
 ---
 
 <Card>
 	<a href={`/collections/${Astro.props.slug}`} class="w-full">
 		<article class="flex flex-col items-start gap-3 p-6">
 			{
-				Astro.props.imageUrl && (
-					// inferSize needs a full URL to work
-					<Image
-						src={new URL(Astro.props.imageUrl, Astro.url.origin).href}
+				imageUrl && (
+					<img
+						src={imageUrl}
 						alt=""
 						class="aspect-square self-center"
 						loading="lazy"
-						width={390}
-						height={390}
-						widths={[390, 390 * 1.5, 390 * 2]}
-						sizes="(min-width: 1024px) 390px, 90vw"
+						width="390"
+						height="390"
 					/>
 				)
 			}

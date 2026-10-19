@@ -1,11 +1,10 @@
-import type { GetImageResult } from 'astro';
 import { RiSystemCheckLine } from 'solid-icons/ri';
 import { For, Show, createSignal } from 'solid-js';
 import { twMerge } from 'tailwind-merge';
 import Card from '~/components/ui/Card.tsx';
 
 interface ProductImageSwitcherProps {
-	productImages: GetImageResult[];
+	productImages: string[];
 }
 
 export function ProductImageSwitcher(props: ProductImageSwitcherProps) {
@@ -32,10 +31,8 @@ export function ProductImageSwitcher(props: ProductImageSwitcherProps) {
 							type="button"
 						>
 							<img
-								{...image.attributes}
 								alt=""
-								src={image.src}
-								srcset={image.srcSet.attribute}
+								src={image}
 								class="h-full w-full object-cover"
 							/>
 							<Show when={index() === currentImageIndex()}>
@@ -50,10 +47,8 @@ export function ProductImageSwitcher(props: ProductImageSwitcherProps) {
 			</div>
 			<Card class="aspect-square">
 				<img
-					{...currentImage().attributes}
 					alt=""
-					src={currentImage().src}
-					srcset={currentImage().srcSet.attribute}
+					src={currentImage()}
 					class="h-full w-full rounded-lg object-cover"
 				/>
 			</Card>

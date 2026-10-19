@@ -10,7 +10,7 @@ import { AddToCartForm } from '~/features/cart/AddToCartForm.tsx';
 import PrimaryLayout from '~/layouts/PrimaryLayout.astro';
 import { getProductById } from 'storefront:client';
 import { unwrap } from '~/lib/util.ts';
-import { getImage } from 'astro:assets';
+import { cldImageUrl } from '~/lib/cloudinary.server';
 import { ProductPrice } from '~/features/product/ProductPrice.tsx';
 
 applyDefaultCacheHeaders(Astro.response.headers);
@@ -27,18 +27,7 @@ if (productResponse.error) {
 const product = productResponse.data;
 
 const productImageSrcs = [product.imageUrl, ...product.images.map((it) => it.url)];
-const productImages = await Promise.all(
-	productImageSrcs.map((src) =>
-		getImage({
-			src: new URL(src, Astro.url.origin).href,
-			alt: '',
-			width: 960,
-			height: 960,
-			widths: [400, 700, 960],
-			sizes: '(min-width: 1280px) 960px, 100vw',
-		}),
-	),
-);
+const productImages = productImageSrcs.map((src) => cldImageUrl(src, 960, 960));
 const firstImage = productImages[0];
 if (!firstImage) throw new Error(`No images found for product ${id}`);
 ---
@@ -62,9 +51,7 @@ if (!firstImage) throw new Error(`No images found for product ${id}`);
 					) : (
 						<Card class="aspect-square justify-center">
 							<img
-								src={firstImage.src}
-								srcset={firstImage.srcSet.attribute}
-								sizes={firstImage.attributes.sizes}
+								src={firstImage}
 								alt={product.name}
 								class="object-cover"
 							/>

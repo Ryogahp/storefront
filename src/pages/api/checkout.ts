@@ -19,6 +19,11 @@ export const POST: APIRoute = async (context) => {
 	if (!STRIPE_SECRET_KEY) {
 		throw new Error('STRIPE_SECRET_KEY environment variable is not set');
 	}
+	if (!US_SHIPPING_RATE_ID || !INTERNATIONAL_SHIPPING_RATE_ID) {
+		throw new Error(
+			'US_SHIPPING_RATE_ID and INTERNATIONAL_SHIPPING_RATE_ID environment variables are not set',
+		);
+	}
 
 	const stripe = new Stripe(STRIPE_SECRET_KEY);
 

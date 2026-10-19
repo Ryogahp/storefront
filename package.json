@@ -54,6 +54,7 @@
 		"@tanstack/solid-query-devtools": "^5.101.4",
 		"@total-typescript/ts-reset": "^0.6.1",
 		"astro": "^4.16.19",
+		"astro-cloudinary": "^1.4.0",
 		"astro-icon": "^1.1.5",
 		"solid-icons": "^1.2.0",
 		"solid-js": "^1.8.23",

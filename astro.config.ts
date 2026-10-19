@@ -85,10 +85,28 @@ export default defineConfig({
 				US_SHIPPING_RATE_ID: envField.string({
 					context: 'server',
 					access: 'secret',
+					optional: true,
 				}),
 				INTERNATIONAL_SHIPPING_RATE_ID: envField.string({
 					context: 'server',
 					access: 'secret',
+					optional: true,
+				}),
+				// Cloudinary (used to deliver product images from the Cloudinary CDN)
+				CLOUDINARY_CLOUD_NAME: envField.string({
+					context: 'server',
+					access: 'public',
+					optional: true,
+				}),
+				CLOUDINARY_API_KEY: envField.string({
+					context: 'server',
+					access: 'secret',
+					optional: true,
+				}),
+				CLOUDINARY_API_SECRET: envField.string({
+					context: 'server',
+					access: 'secret',
+					optional: true,
 				}),
 			},
 		},
