@@ -16,6 +16,10 @@ export const POST: APIRoute = async (context) => {
 	// because they could be in the checkout screen _while_ the last thing was being ordered,
 	// then get an error after submitting payment
 
+	if (!STRIPE_SECRET_KEY) {
+		throw new Error('STRIPE_SECRET_KEY environment variable is not set');
+	}
+
 	const stripe = new Stripe(STRIPE_SECRET_KEY);
 
 	const countrySpecs = await stripe.countrySpecs.retrieve('US');

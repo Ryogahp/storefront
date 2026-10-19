@@ -9,6 +9,10 @@ import { sendCheckoutSuccessEmail } from '~/lib/emails.ts';
 import { stripeProductMetadataSchema } from '~/lib/products.ts';
 
 export const GET: APIRoute = async (context) => {
+	if (!STRIPE_SECRET_KEY) {
+		throw new Error('STRIPE_SECRET_KEY environment variable is not set');
+	}
+
 	const stripe = new Stripe(STRIPE_SECRET_KEY);
 
 	const sessionId = context.url.searchParams.get('session_id');
